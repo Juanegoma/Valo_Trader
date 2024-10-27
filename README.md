@@ -1,4 +1,5 @@
-# Valo_Trader es una plataforma que facilita las transacciones de armas entre jugadores en Valorant. Este sistema permite la transferencia, reembolso y devolución de armas, asegurando un intercambio ágil y seguro. Las reglas principales son:
+# Valo_Trader 
+Es una plataforma que facilita las transacciones de armas entre jugadores en Valorant. Este sistema permite la transferencia, reembolso y devolución de armas, asegurando un intercambio ágil y seguro. Las reglas principales son:
 
 - Transferencia de Armas: Los jugadores pueden transferir armas de su inventario a otros jugadores, registrando detalles como cantidad y fecha.
 
