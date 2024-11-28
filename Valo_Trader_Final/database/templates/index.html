@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valo Trader</title>
+  <style>
+    body {
+        font-family: 'Valorant', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-image: url("https://wallpapers.com/images/hd/white-and-red-valorant-logo-oso76odtlza6r89g.jpg"); /* Agrega la imagen de fondo */
+        background-size: cover; /* Ajusta la imagen para cubrir todo el body */
+        background-position: center; /* Centra la imagen */
+        background-color: #f6f1f7;
+        margin: 0;
+    }
+
+    h1 {
+      color: #ff4654;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 16px;
+    }
+
+    button[type="submit"] {
+      background-color: #ff4654;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    
+    }
+
+    button[type="submit"]:hover {
+      background-color: #e63946;
+    
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .login-container {
+    background-color: rgba(131, 130, 130, 0.8);
+      background-size: cover;
+      background-position: center;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Valo Trader</h1>
+
+  {% if not usuario %}
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm" method="POST" action="/iniciar_sesion">
+      <label for="nombre_usuario">Username:</label>
+      <input type="text" id="nombre_usuario" name="nombre_usuario" required>
+      <br>
+      <label for="contrasena">Password:</label>
+      <input type="password" id="contrasena" name="contrasena" required>
+      <br>
+      <button type="submit">Login</button>
+    </form>
+
+    <h2>Registrar</h2>
+    <form id="registroForm" method="POST" action="/registrar">
+      <label for="nombre_usuario">Username:</label>
+      <input type="text" id="nombre_usuario" name="nombre_usuario" required>
+      <br>
+      <label for="contrasena">Password:</label>
+      <input type="password" id="contrasena" name="contrasena" required>
+      <br>
+      <label for="correo">Email:</label>
+      <input type="email" id="correo" name="correo" required>
+      <br>
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+  {% else %}
+  <h2>Bienvenido, {{ usuario.nombre_usuario }}!</h2>
+  <p>Tu saldo es: {{ usuario.saldo }}</p>
+  <h3>Tu inventario:</h3>
+  <ul>
+    {% for arma, cantidad in inventario %}
+    <li>{{ arma }}: {{ cantidad }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Transferir Arma</h2>
+  <form method="POST" action="/transferir">
+    <label for="usuario_destino_id">ID de usuario destino:</label>
+    <input type="number" id="usuario_destino_id" name="usuario_destino_id" required>
+    <br>
+    <label for="arma_id">ID de arma:</label>
+    <input type="number" id="arma_id" name="arma_id" required>
+    <br>
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" name="cantidad" required>
+    <br>
+    <button type="submit">Transferir</button>
+  </form>
+
+  <h2>Reembolsar Arma</h2>
+  <form method="POST" action="/reembolsar">
+    <label for="arma_id">ID de arma:</label>
+    <input type="number" id="arma_id" name="arma_id" required>
+    <br>
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" name="cantidad" required>
+    <br>
+    <button type="submit">Reembolsar</button>
+  </form>
+
+  <h2>Devolver Arma</h2>
+  <form method="POST" action="/devolver">
+    <label for="arma_id">ID de arma:</label>
+    <input type="number" id="arma_id" name="arma_id" required>
+    <br>
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" name="cantidad" required>
+    <br>
+    <button type="submit">Devolver</button>
+  </form>
+
+  <h2>Referir Amigo</h2>
+  <form method="POST" action="/referir">
+    <label for="referido_id">ID de amigo referido:</label>
+    <input type="number" id="referido_id" name="referido_id" required>
+    <br>
+    <button type="submit">Referir</button>
+  </form>
+
+  <a href="/cerrar_sesion">Cerrar sesión</a>
+  {% endif %}
+
+  <script>
+  </script>
+</body>
+
+</html>
